@@ -1,0 +1,1 @@
+require(['jquery','../bootstrap/js/bootstrap','global_vars', 'source','renderer'], function($){});
