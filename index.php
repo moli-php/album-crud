@@ -1,6 +1,22 @@
 <?php require_once "header.php"; ?>
+<div class="row">
+<div class="col-md-6">
 
-<h1>Home <small>REST Crud Application</small></h1>
+<h1>
+	Home <small>REST Crud Application</small>
+</h1>
+
+</div>
+<div class="col-md-6">
+    <div class="input-group search_box">
+      <input type="text" class="form-control" placeholder="Search..." id="search">
+      <span class="input-group-btn">
+        <button class="btn btn-defualt search_btn"><i class="glyphicon glyphicon-search"></i></button>
+      </span>
+    </div>
+</div>
+</div>
+
 
 <div class="container">
 	<form class="form form-horizontal" role="form">

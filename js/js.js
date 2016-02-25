@@ -8,6 +8,7 @@ $(function(){
 	var total_records = 0;
 	var ids = []; // used for delete multiple records
 	var page = getPage();
+	var xhr;
 
 	function getPage() {
 		var page = window.location.hash;
@@ -17,8 +18,17 @@ $(function(){
 	}
 
 	function getCrud(page) {
-		$.ajax({
-			url : api_path + 'page/' + page + '/length/' + page_length,
+
+		var search = $.trim($('#search').val()).toLowerCase();
+		search = (search.length) ? '/search/' + search : '';
+		
+
+	 	if(xhr && xhr.readyState != 4){
+            xhr.abort();
+        }
+
+		xhr = $.ajax({
+			url : api_path + 'page/' + page + '/length/' + page_length + search,
 			type : 'get',
 			dataType : 'json',
 			async : false,
@@ -76,6 +86,12 @@ $(function(){
 	$('table tbody').delegate('input:checkbox', 'click', function(){
 		enabled_disable_delete_button();
 	});
+
+	// search box key up event
+	$('#search').keyup(function(){
+		getCrud(0);
+       
+	})
 
 	$('#add_btn').click(function(){
 		var title = $.trim($('#title').val());

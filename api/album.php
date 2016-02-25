@@ -8,18 +8,23 @@ class Album {
 		$this->conn = mysqli_connect('localhost', 'root', '','test') or die('Db error');
 	}
 
-	public function countAlbum() {
-		$sql = "select count(*) from album";
+	public function countAlbum($search = null) {
+		$search = ($search) ? " where concat(title, artist) like '%{$search}%'" : "";
+		$sql = "select count(*) from album" . $search;
 		return $this->conn->query($sql)->fetch_row();
 	}
 
-	public function getAlbum($id = null, $page = null, $length = null){
+	public function getAlbum($id = null, $page = null, $length = null, $search = null){
 		if($id){
 			$sql = "select * from album where id = " . $id;
 			return $this->conn->query($sql)->fetch_assoc();
 		}else{
+
 			$sql = "select * from album order by id desc limit {$page}, {$length}";
-			 // echo $sql;
+			if($search){
+				$sql = "select * from album where concat(title, artist) like '%{$search}%' order by id desc limit {$page}, {$length}";
+			}
+			// echo $sql;
 
 			$result_set = $this->conn->query($sql);
 			$rows = array();
@@ -27,11 +32,9 @@ class Album {
 			
 				$row['title'] = htmlspecialchars($row['title']);
 				$row['artist'] = htmlspecialchars($row['artist']);
-				//var_dump($row);
 				array_push($rows, $row);
-				// var_dump($row);
 			}
-			return array('result_set' => $rows, 'count' => $this->countAlbum());
+			return array('result_set' => $rows, 'count' => $this->countAlbum($search));
 		
 		}
 	}

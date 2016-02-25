@@ -9,10 +9,8 @@ class Service {
 		$this->album = new album();
 	}
 
-	public function get($id = null, $page = null, $length = null){
-		// var_dump($this->album->getAlbum($id, $page, $length));
-		// var_dump(json_encode($this->album->getAlbum($id, $page, $length)));
-		return json_encode($this->album->getAlbum($id, $page, $length));
+	public function get($id = null, $page = null, $length = null, $search = null){
+		return json_encode($this->album->getAlbum($id, $page, $length, $search));
 	}
 
 	public function add($data) {
@@ -44,6 +42,7 @@ class Service {
 $service = new Service();
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 $page = isset($_GET['page']) ? ($_GET['page'] <= 1) ? 0 : (($_GET['page'] -1) * 5) : 0;
+$search = isset($_GET['search']) ? strtolower($_GET['search']) : null;
 
 
 $length = isset($_GET['length']) ? $_GET['length'] : 5;
@@ -53,7 +52,7 @@ parse_str(file_get_contents('php://input'), $data);
 
 switch($method){
 	case 'GET' :
-		echo $service->get($id, $page, $length);
+		echo $service->get($id, $page, $length, $search);
 	break;
 
 	case 'POST' :
