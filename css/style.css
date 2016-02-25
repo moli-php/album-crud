@@ -1,0 +1,15 @@
+body {
+ 	background-color : #eee;
+}
+
+.con {
+	background-color : #ccc;
+}
+
+#paginator_view {
+	text-align : center;
+}
+
+#delete_selected {
+	padding : 3px 6px;
+}
