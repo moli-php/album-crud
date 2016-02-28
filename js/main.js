@@ -1,1 +1,1 @@
-require(['jquery','../bootstrap/js/bootstrap','global_vars', 'source','renderer'], function($){});
+require(['jquery','bootstrap_js/bootstrap','global_vars', 'source','renderer'], function($){});

@@ -1,15 +1,13 @@
 ({
-    // appDir : './',
+    appDir : '../js',
     baseUrl: './',
     paths: {
         bootstrap_js : '../bootstrap/js'
     },
-    dir: './source',
+    dir: '../js/dist',
     modules : [
         {
-            name: 'Main'
+            name: 'main'
         }
-        
-        
     ]
 })
